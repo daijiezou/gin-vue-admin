@@ -17,6 +17,34 @@ export const formatDate = (time) => {
   }
 }
 
+
+export const formatDateDay = (time) => {
+  if (time !== null && time !== '') {
+    var date = new Date(time)
+    return formatTimeToStr(date, 'yyyy-MM-dd')
+  } else {
+    return ''
+  }
+}
+
+
+export const formatBirthday = (time) => {
+  const birthday = new Date(time);
+  const now = new Date();
+
+  // 计算年龄
+  let age = now.getFullYear() - birthday.getFullYear();
+  const monthDifference = now.getMonth() - birthday.getMonth();
+  const dayDifference = now.getDate() - birthday.getDate();
+
+  // 调整年龄，如果当前日期在生日之前
+  if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+    age--;
+  }
+
+  return age;
+}
+
 export const filterDict = (value, options) => {
   const rowLabel = options && options.filter(item => item.value === value)
   return rowLabel && rowLabel[0] && rowLabel[0].label
